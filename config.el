@@ -87,3 +87,8 @@
   (blamer-min-offset 70)
   :config
   (global-blamer-mode 1))
+
+
+(define-key key-translation-map (kbd "C-h") (kbd "DEL"))
+(define-key key-translation-map (kbd "C-M-h") (kbd "M-DEL"))
+(define-key key-translation-map (kbd "C-?") (kbd "C-h"))
