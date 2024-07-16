@@ -80,7 +80,7 @@
 
 (use-package blamer
   :bind (("s-i" . blamer-show-commit-info)
-         ("C-c i" . blamer-show-posframe-commit-info))
+         ("C-c b" . blamer-show-posframe-commit-info))
   :defer 20
   :custom
   (blamer-idle-time 0.3)
