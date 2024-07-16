@@ -89,6 +89,17 @@
   (global-blamer-mode 1))
 
 
+;; accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("C-c i i" . 'copilot-accept-completion)
+              ("C-c i w" . 'copilot-accept-completion-by-word)
+              ("C-c i l" . 'copilot-accept-completion-by-line)
+              ("C-c i p" . 'copilot-accept-completion-by-paragraph)
+              ("C-S-<f12>" . 'copilot-accept-completion-by-word)))
+
+
 (define-key key-translation-map (kbd "C-h") (kbd "DEL"))
 (define-key key-translation-map (kbd "C-M-h") (kbd "M-DEL"))
 (define-key key-translation-map (kbd "C-?") (kbd "C-h"))
