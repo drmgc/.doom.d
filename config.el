@@ -78,7 +78,7 @@
 ;; they are implemented.
 
 
-(use-package blamer
+(use-package! blamer
   :bind (("s-i" . blamer-show-commit-info)
          ("C-c b" . blamer-show-posframe-commit-info))
   :defer 20
@@ -93,6 +93,9 @@
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
   :bind (:map copilot-completion-map
+              ("C-c i n" . 'copilot-next-completion)
+              ("C-c i p" . 'copilot-previous-completion)
+
               ("C-c i i" . 'copilot-accept-completion)
               ("C-c i w" . 'copilot-accept-completion-by-word)
               ("C-c i l" . 'copilot-accept-completion-by-line)

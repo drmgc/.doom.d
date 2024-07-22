@@ -51,3 +51,5 @@
 
 (package! copilot
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
+
+(package! blamer :recipe (:host github :repo "artawower/blamer.el"))
