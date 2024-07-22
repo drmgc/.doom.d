@@ -3,6 +3,16 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+;;
+;; Adjust garbage collection thresholds during startup, and thereafter
+;;
+(let ((normal-gc-cons-threshold (* 32 1024 1024))
+      (init-gc-cons-threshold (* 512 1024 1024)))
+  (setq gc-cons-threshold init-gc-cons-threshold)
+  ;; (setq gc-cons-percentage 0.5)
+  (add-hook 'emacs-startup-hook
+            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
@@ -24,7 +34,7 @@
 ;; (setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 (setq doom-font (font-spec :family "Fira Code" :size 18 :weight 'semi-light)
-     doom-variable-pitch-font (font-spec :family "Fira Sans" :size 16))
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 19))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -106,3 +116,6 @@
 (define-key key-translation-map (kbd "C-h") (kbd "DEL"))
 (define-key key-translation-map (kbd "C-M-h") (kbd "M-DEL"))
 (define-key key-translation-map (kbd "C-?") (kbd "C-h"))
+
+(after! lsp-mode
+  (setq lsp-print-performance t))
