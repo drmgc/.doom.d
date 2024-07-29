@@ -130,3 +130,6 @@
 
 (after! company-mode
   (setq company-idle-delay 0.5))
+
+(after! ispell
+  (setq ispell-dictionary "en"))
