@@ -13,6 +13,11 @@
   (add-hook 'emacs-startup-hook
             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 
+(setq initial-frame-alist
+      (append initial-frame-alist
+              '((width  . 100)
+                (height . 45))))
+
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
