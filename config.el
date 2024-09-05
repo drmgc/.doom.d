@@ -110,14 +110,18 @@
 ;; accept completion from copilot and fallback to company
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("C-c i n" . 'copilot-next-completion)
-              ("C-c i p" . 'copilot-previous-completion)
+  :config (map! :after copilot
+                :map copilot-completion-map
+                :leader
+                :prefix "C-c"
+                "C-c" #'copilot-accept-completion
+                "C-w" #'copilot-accept-completion-by-word
+                "C-l" #'copilot-accept-completion-by-line
+                "C-p" #'copilot-accept-completion-by-paragraph
 
-              ("C-c i i" . 'copilot-accept-completion)
-              ("C-c i w" . 'copilot-accept-completion-by-word)
-              ("C-c i l" . 'copilot-accept-completion-by-line)
-              ("C-c i p" . 'copilot-accept-completion-by-paragraph)
+                "n" #'copilot-next-completion
+                "p" #'copilot-previous-completion)
+  :bind (:map copilot-completion-map
               ("C-S-<f12>" . 'copilot-accept-completion-by-word)))
 
 
