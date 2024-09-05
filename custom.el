@@ -6,7 +6,10 @@
  '(custom-safe-themes
    '("9f297216c88ca3f47e5f10f8bd884ab24ac5bc9d884f0f23589b0a46a608fe14" default))
  '(package-selected-packages '(blamer modus-themes mindre-theme apropospriate-theme))
- '(safe-local-variable-values '((ispell-dictionary . "ru"))))
+ '(safe-local-variable-values
+   '((web-mode-style-padding . 0)
+     (web-mode-script-padding . 0)
+     (ispell-dictionary . "ru"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
