@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Jest / describe
+# key: jd
+# --
+describe('${1:name}', () => {$0});
