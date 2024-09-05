@@ -157,3 +157,7 @@
 
 (after! ispell
   (setq ispell-dictionary "en"))
+
+(map! :after yasnippet
+      :map prog-mode-map
+      "C-c TAB" #'yas-expand)
