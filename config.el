@@ -132,6 +132,26 @@
 (after! lsp-mode
   (setq lsp-print-performance t))
 
+(after! lsp-ui
+  (setq lsp-ui-sideline-diagnostic-max-lines 4)
+  (setq lsp-ui-doc-show-with-cursor nil)
+
+  (setq lsp-headerline-breadcrumb-enable t)
+  (setq lsp-ui-sideline-show-code-actions t)
+  (setq lsp-ui-sideline-show-diagnostics t)
+  (setq lsp-ui-doc-show-with-mouse t)
+
+  (setq lsp-ui-imenu-auto-refresh t)
+
+  (setq lsp-lens-enable t))
+
+(map! :after lsp-ui
+      :map  lsp-ui-mode-map
+      :leader
+      :prefix "c"
+      "I" #'lsp-ui-imenu
+      "h" #'lsp-ui-doc-show)
+
 (after! company-mode
   (setq company-idle-delay 0.5))
 
