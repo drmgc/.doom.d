@@ -104,7 +104,7 @@
   (blamer-idle-time 0.3)
   (blamer-min-offset 70)
   :config
-  (global-blamer-mode 1))
+  (global-blamer-mode 0))
 
 
 ;; accept completion from copilot and fallback to company
