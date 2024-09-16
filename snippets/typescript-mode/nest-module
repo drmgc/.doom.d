@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Nest / Module
+# key: nem
+# --
+import { Module } from '@nestjs/common';
+
+@Module({
+  ${1:imports: [],}
+  ${2:controllers: [],}
+  ${3:providers: [],}
+  ${3:exports: [],}
+})
+export class ${1:$$(drmgc/pascal-case (file-name-base))} {}

@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: throw new Error('Not implemented')
+# key: nie
+# --
+throw new Error('Not implemented'); // TODO: implement it

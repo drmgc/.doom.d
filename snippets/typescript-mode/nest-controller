@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Nest / Controller
+# --
+import { Controller } from '@nestjs/common';
+
+@Controller($2)
+export class ${1:$$(drmgc/pascal-case (file-name-base))} {$0}

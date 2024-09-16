@@ -129,6 +129,9 @@
 (define-key key-translation-map (kbd "C-M-h") (kbd "M-DEL"))
 (define-key key-translation-map (kbd "C-?") (kbd "C-h"))
 
+;;
+;;; Lsp
+
 (after! lsp-mode
   (setq lsp-print-performance t))
 
@@ -158,6 +161,36 @@
 (after! ispell
   (setq ispell-dictionary "en"))
 
+;;
+;;; Yasnippet
+
 (map! :after yasnippet
       :map prog-mode-map
       "C-c TAB" #'yas-expand)
+
+;;
+;;; Subword-mode
+
+(map! :leader
+      "[" #'subword-mode)
+
+
+;;
+;;; cases
+
+(defun drmgc/space-case (input)
+  "Convert any string to foo bar (spaces separated) format."
+  (let* ((case-fold-search nil)
+         (case-separated (replace-regexp-in-string "\\([a-z]\\)\\([A-Z]\\)" "\\1 \\2" input))
+         (delimiter-separated (replace-regexp-in-string "[-_\. ]+" " " case-separated)))
+    (downcase delimiter-separated)))
+
+(defun drmgc/space-to-pascal-case (input)
+  "Convert a space-separated string like 'foo bar baz' to 'FooBarBaz' (PascalCase)."
+  (let* ((words (split-string input " "))
+         (capitalized-words (mapcar #'capitalize words)))
+    (apply #'concat capitalized-words)))
+
+(defun drmgc/pascal-case (input)
+  "Convert any string string to PascalCase, e.g. 'FooBarBaz'."
+  (drmgc/space-to-pascal-case (drmgc/space-case input)))
