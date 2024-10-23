@@ -207,3 +207,10 @@
 
 (set-variable 'org-hide-emphasis-markers t)
 
+
+;;
+;;; sh-mode
+
+(use-package! sh-script
+  :hook (sh-mode . flymake-mode))
+
