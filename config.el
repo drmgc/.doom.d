@@ -200,3 +200,10 @@
 (defun drmgc/pascal-case (input)
   "Convert any string string to PascalCase, e.g. 'FooBarBaz'."
   (drmgc/space-to-pascal-case (drmgc/space-case input)))
+
+
+;;
+;;; Org-mode
+
+(set-variable 'org-hide-emphasis-markers t)
+
