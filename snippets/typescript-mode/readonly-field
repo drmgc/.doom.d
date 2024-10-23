@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: readonly field
+# key: rf
+# --
+${1:${2:private} }readonly $3: $4,

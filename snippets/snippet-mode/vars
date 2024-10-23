@@ -1,8 +1,9 @@
 # -*- mode: snippet -*-
 # name: Snippet header
-# contributor : joaotavora
+# contributor : joaotavora, drmgc
 # key: vars
 # --
+# -*- mode: snippet; require-final-newline: nil -*-
 # name: $1${2:
 # key: ${3:trigger-key}}${4:
 # keybinding : ${5:keybinding}}${6:
