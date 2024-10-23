@@ -214,3 +214,9 @@
 (use-package! sh-script
   :hook (sh-mode . flymake-mode))
 
+
+
+;;
+;;; kusto-mode
+
+(use-package! kusto-mode)

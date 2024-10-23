@@ -55,3 +55,5 @@
 (package! blamer :recipe (:host github :repo "artawower/blamer.el"))
 
 (package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
+
+(package! kusto-mode :recipe (:host github :repo "ration/kusto-mode.el" :branch "master"))
