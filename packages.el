@@ -55,5 +55,7 @@
 (package! blamer :recipe (:host github :repo "artawower/blamer.el"))
 
 (package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
+(package! typst-ts-mode
+  :recipe (:host codeberg :repo "meow_king/typst-ts-mode" :files (:defaults "*.el")))
 
 (package! kusto-mode :recipe (:host github :repo "ration/kusto-mode.el" :branch "master"))
