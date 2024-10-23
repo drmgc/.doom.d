@@ -97,13 +97,19 @@
 
 
 (use-package! blamer
-  :bind (("s-i" . blamer-show-commit-info)
-         ("C-c b" . blamer-show-posframe-commit-info))
   :defer 20
   :custom
   (blamer-idle-time 0.3)
-  (blamer-min-offset 70)
+  (blamer-min-offset 48)
+  (blamer-max-commit-message-length 120)
+  (blamer-type 'postframe-popup)
   :config
+  (map! :after blamer
+        :map prog-mode-map
+        :leader
+        :prefix "g"
+        "I" #'blamer-show-commit-info
+        "i" #'blamer-show-posframe-commit-info)
   (global-blamer-mode 0))
 
 
