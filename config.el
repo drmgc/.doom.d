@@ -215,6 +215,12 @@
   :hook (sh-mode . flymake-mode))
 
 
+;;
+;;; prisma-mode
+
+(use-package! lsp
+  :hook (prisma-mode . lsp))
+
 
 ;;
 ;;; kusto-mode
