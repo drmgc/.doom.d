@@ -219,7 +219,8 @@
 ;;; prisma-mode
 
 (use-package! lsp
-  :hook (prisma-mode . lsp))
+  :hook (prisma-mode . lsp)
+  :init (setq lsp-auto-execute-action nil))
 
 
 ;;
