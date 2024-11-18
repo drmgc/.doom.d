@@ -151,7 +151,7 @@
   (setq lsp-ui-doc-show-with-cursor nil)
 
   (setq lsp-headerline-breadcrumb-enable t)
-  (setq lsp-ui-sideline-show-code-actions t)
+  (setq lsp-ui-sideline-show-code-actions nil)
   (setq lsp-ui-sideline-show-diagnostics t)
   (setq lsp-ui-doc-show-with-mouse t)
 
