@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# contributor: Sergey Naumov
+# name: import node:assert/strict
+# key: imas
+# --
+import assert from 'node:assert/${1:strict}';$0

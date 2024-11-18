@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: spec
+# key: spec
+# --
+/* eslint-disable jest/valid-title */
+
+const Testee = ${1:TESTEE};
+type Testee = $1;
+
+${2:const Fixture = ${3:FIXTURE};
+type Fixture = $3;
+}
+describe(Testee.name, () => {
+  let testee: Testee;$0
+});

@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Jest / spy.On
+# key: js
+# --
+jest.spyOn($1, $2)$0

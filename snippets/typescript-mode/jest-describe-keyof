@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Jest / describe keyof Teste
+# key: jdk
+# --
+describe('${1:method}' satisfies keyof ${2:Testee}, () => {$0});
