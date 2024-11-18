@@ -208,6 +208,56 @@
 
 
 ;;
+;;; EOL symbols
+
+(defun drmgc/insert-at-eol-and-return (str)
+  "Insert a STR at the end of current line and return to the original position"
+  (let ((original-pos (point)))
+    (end-of-line)
+    (insert str)
+    (goto-char original-pos)))
+
+(defun drmgc/delete-at-eol-and-return ()
+  "Delete a char at the end of current line and return to the original position"
+  (interactive)
+  (let ((original-pos (point)))
+    (end-of-line)
+    (delete-char -1)
+    (goto-char original-pos)))
+
+(setq drmgc/eol-insertables
+      '((";" . ";")
+        ("," . ",")
+        ("i" . " in")))
+
+(defun drmgc/define-insert-at-eol (name shortcut char)
+  (let ((fn-name (concat "drmgc/insert-at-eol-and-return/" name)))
+    (fset (intern fn-name)
+          (lambda ()
+            (:documentation (format "Insert %s at the end of current line and return to the original position." char))
+            (interactive)
+            (drmgc/insert-at-eol-and-return char)))
+    (map! :map prog-mode-map
+          :prefix "C-c SPC"
+          shortcut (symbol-function (intern fn-name)))))
+
+(setq drmgc/eol-insertables;
+      '(
+        ("semicolon" . (";" ";"))
+        ("comma" . ("," ","))
+        ("in" . ("i" " in"))
+        ))
+
+(map! :map prog-mode-map
+      :prefix "C-c SPC"
+      "DEL" #'drmgc/delete-at-eol-and-return)
+
+(mapc
+ (lambda (args)
+   (apply 'drmgc/define-insert-at-eol (car args) (cdr args)))
+ drmgc/eol-insertables)
+
+;;
 ;;; Org-mode
 
 (set-variable 'org-hide-emphasis-markers t)
