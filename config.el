@@ -180,12 +180,18 @@
       :map prog-mode-map
       "C-c TAB" #'yas-expand)
 
+
+;;
+;;; typescript-mode
+
+(add-hook! typescript-mode
+           (setq tab-width 2))
+
 ;;
 ;;; Subword-mode
 
 (map! :leader
       "[" #'subword-mode)
-
 
 ;;
 ;;; cases
