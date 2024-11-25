@@ -64,3 +64,4 @@
   :recipe (:host github :repo "pkryger/difftastic.el" :branch "main")
   :pin "4980c08f7ad7777c364a3251bcc314b0f0d4d7dc")
 
+(package! evil-textobj-tree-sitter)

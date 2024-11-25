@@ -258,6 +258,11 @@
  drmgc/eol-insertables)
 
 ;;
+;;; evil-textobj-tree-sitter
+(after! evil-textobj-tree-sitter)
+
+
+;;
 ;;; Org-mode
 
 (set-variable 'org-hide-emphasis-markers t)
