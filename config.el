@@ -57,6 +57,7 @@
 (setq display-line-numbers-type t)
 
 (global-visual-line-mode 1)
+(global-page-break-lines-mode 1)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
