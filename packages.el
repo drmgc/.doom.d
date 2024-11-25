@@ -59,3 +59,8 @@
   :recipe (:host codeberg :repo "meow_king/typst-ts-mode" :files (:defaults "*.el")))
 
 (package! kusto-mode :recipe (:host github :repo "ration/kusto-mode.el" :branch "master"))
+
+(package! difftastic
+  :recipe (:host github :repo "pkryger/difftastic.el" :branch "main")
+  :pin "4980c08f7ad7777c364a3251bcc314b0f0d4d7dc")
+
