@@ -141,6 +141,7 @@
 (define-key key-translation-map (kbd "C-M-h") (kbd "M-DEL"))
 (define-key key-translation-map (kbd "C-?") (kbd "C-h"))
 
+
 ;;
 ;;; Lsp
 
@@ -167,12 +168,17 @@
       "I" #'lsp-ui-imenu
       "h" #'lsp-ui-doc-show)
 
+
+
 (after! company-mode
   (setq company-idle-delay 0.5))
+
+
 
 (after! ispell
   (setq ispell-dictionary "en"))
 
+
 ;;
 ;;; Yasnippet
 
@@ -180,19 +186,21 @@
       :map prog-mode-map
       "C-c TAB" #'yas-expand)
 
-
+
 ;;
 ;;; typescript-mode
 
 (add-hook! typescript-mode
            (setq tab-width 2))
 
+
 ;;
 ;;; Subword-mode
 
 (map! :leader
       "[" #'subword-mode)
 
+
 ;;
 ;;; cases
 
@@ -214,6 +222,7 @@
   (drmgc/space-to-pascal-case (drmgc/space-case input)))
 
 
+
 ;;
 ;;; EOL symbols
 
@@ -264,24 +273,25 @@
    (apply 'drmgc/define-insert-at-eol (car args) (cdr args)))
  drmgc/eol-insertables)
 
+
 ;;
 ;;; evil-textobj-tree-sitter
 (after! evil-textobj-tree-sitter)
 
-
+
 ;;
 ;;; Org-mode
 
 (set-variable 'org-hide-emphasis-markers t)
 
-
+
 ;;
 ;;; sh-mode
 
 (use-package! sh-script
   :hook (sh-mode . flymake-mode))
 
-
+
 ;;
 ;;; prisma-mode
 
@@ -289,13 +299,13 @@
   :hook (prisma-mode . lsp)
   :init (setq lsp-auto-execute-action nil))
 
-
+
 ;;
 ;;; kusto-mode
 
 (use-package! kusto-mode)
 
-
+
 ;;
 ;;; difft
 
