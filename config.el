@@ -194,6 +194,15 @@
 (add-hook! typescript-mode
            (setq tab-width 2))
 
+
+
+;;
+;;; plantuml
+
+(use-package! plantuml-mode
+  :custom
+  (plantuml-indent-level 4))
+
 
 ;;
 ;;; Subword-mode
