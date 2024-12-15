@@ -17,6 +17,7 @@
       (append initial-frame-alist
               '((width  . 100)
                 (height . 45))))
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
