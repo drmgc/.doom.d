@@ -191,8 +191,9 @@
 ;;
 ;;; typescript-mode
 
-(add-hook! typescript-mode
-           (setq tab-width 2))
+(use-package! typescript-mode
+  :custom
+  (typescript-indent-level 2))
 
 
 
