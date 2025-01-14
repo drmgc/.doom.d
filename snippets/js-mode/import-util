@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# contributor: Sergey Naumov
+# name: import node:util
+# key: imu
+# --
+import util from 'node:util';$0

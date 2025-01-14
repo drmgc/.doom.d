@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: #+begin_src plantuml
+# key: bsp
+# --
+#+begin_src plantuml${1: file: ${2:diagram}.png}
+@start${3:uml}
+$0
+@end${3}
+#+end_src

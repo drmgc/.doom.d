@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: [export] namespace
+# key: ns
+# --
+${1:export }namespace $2 {$0}
