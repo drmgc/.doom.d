@@ -209,7 +209,8 @@
 ;;; Subword-mode
 
 (map! :leader
-      "[" #'subword-mode)
+      "[" #'subword-mode
+      "] g" #'glasses-mode)
 
 
 ;;
