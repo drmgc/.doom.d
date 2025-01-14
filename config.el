@@ -202,7 +202,7 @@
 
 (use-package! plantuml-mode
   :custom
-  (plantuml-indent-level 4))
+  (plantuml-indent-level 2))
 
 
 ;;
