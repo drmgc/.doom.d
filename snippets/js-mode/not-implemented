@@ -2,4 +2,4 @@
 # name: throw new Error('Not implemented')
 # key: nie
 # --
-throw new Error('Not implemented'); // TODO: implement it
+throw new Error('Not implemented'); // FIXME: implement it
