@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: println!("{}", value);
+# key: println
+# key: pln
+# --
+println!("${1:{\}}", $2);
