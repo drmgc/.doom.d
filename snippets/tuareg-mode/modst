@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: module ... = struct ... end
+# key: mdst
+# --
+module $1 = struct$0
+end

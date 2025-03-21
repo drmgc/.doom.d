@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: module type ... = sig ... end
+# key: mtsi
+# --
+module type $1 = sig$0
+end
