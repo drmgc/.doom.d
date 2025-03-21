@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: (async) throw new Error('Not implemented')
+# key: anie
+# --
+await Promise.resolve();
+throw new Error('Not implemented'); // FIXME: implement it
