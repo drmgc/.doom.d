@@ -67,3 +67,8 @@
 (package! evil-textobj-tree-sitter)
 
 (package! page-break-lines)
+(package! tree-surgeon
+  :recipe (:type git :host github :repo "meain/tree-surgeon"))
+
+(package! scopeline)
+

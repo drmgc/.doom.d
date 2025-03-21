@@ -97,6 +97,9 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+(setq backup-by-copying t)
+
+
 
 (use-package! blamer
   :defer 20
@@ -292,6 +295,68 @@
 
 
 ;;
+;;; tree-surgeon
+(use-package tree-surgeon
+  :config
+  (map! :map prog-mode-map
+        :leader
+        :prefix "H"
+        "j" #'tree-surgeon-split-join)
+  :custom
+  (tree-surgeon-split-join-settings
+   '((json-ts-mode
+      (object)
+      . none)
+     (rust-ts-mode
+      (parameters arguments)
+      . trailing)
+     (python-ts-mode
+      (parameters argument_list)
+      . trailing)
+     (ruby-ts-mode
+      (method_parameters argument_list)
+      . none)
+     (go-ts-mode
+      (argument_list parameter_list literal_value)
+      . trailing)
+     (typescript-ts-mode
+      (formal_parameters arguments)
+      . trailing)
+     (typescript-mode
+      (object array arguments formal_parameters union_type type_parameters type_arguments named_imports)))))
+
+
+
+(setq treesit-language-source-alist
+      '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+        (cmake "https://github.com/uyha/tree-sitter-cmake")
+        (css "https://github.com/tree-sitter/tree-sitter-css")
+        (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+        (go "https://github.com/tree-sitter/tree-sitter-go")
+        (html "https://github.com/tree-sitter/tree-sitter-html")
+        (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+        (json "https://github.com/tree-sitter/tree-sitter-json")
+        (make "https://github.com/alemuller/tree-sitter-make")
+        (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+        (python "https://github.com/tree-sitter/tree-sitter-python")
+        (toml "https://github.com/tree-sitter/tree-sitter-toml")
+        (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+        (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+        (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+;; (setq major-mode-remap-alist
+;;  '((yaml-mode . yaml-ts-mode)
+;;    (bash-mode . bash-ts-mode)
+;;    (js2-mode . js-ts-mode)
+;;    (typescript-mode . typescript-ts-mode)
+;;    (json-mode . json-ts-mode)))
+
+
+
+(use-package scopeline
+  :config (add-hook 'prog-mode-hook #'scopeline-mode))
+
+
+;;
 ;;; Org-mode
 
 (set-variable 'org-hide-emphasis-markers t)
@@ -324,8 +389,8 @@
 (use-package difftastic
   :demand t
   :bind (:map magit-blame-read-only-mode-map
-         ("D" . difftastic-magit-show)
-         ("S" . difftastic-magit-show))
+              ("D" . difftastic-magit-show)
+              ("S" . difftastic-magit-show))
   :config
   (eval-after-load 'magit-diff
     '(transient-append-suffix 'magit-diff '(-1 -1)
@@ -336,20 +401,57 @@
 ;;
 ;;; gdscript
 
-(defun lsp--gdscript-ignore-errors (original-function &rest args)
-  "Ignore the error message resulting from Godot not replying to the `JSONRPC' request."
-  (if (string-equal major-mode "gdscript-mode")
-      (let ((json-data (nth 0 args)))
-        (if (and (string= (gethash "jsonrpc" json-data "") "2.0")
-                 (not (gethash "id" json-data nil))
-                 (not (gethash "method" json-data nil)))
-            nil ; (message "Method not found")
-          (apply original-function args)))
-    (apply original-function args)))
-;; Runs the function `lsp--gdscript-ignore-errors` around `lsp--get-message-type` to suppress unknown notification errors.
-(advice-add #'lsp--get-message-type :around #'lsp--gdscript-ignore-errors)
+;; (defun lsp--gdscript-ignore-errors (original-function &rest args)
+;;   "Ignore the error message resulting from Godot not replying to the `JSONRPC' request."
+;;   (if (string-equal major-mode "gdscript-mode")
+;;       (let ((json-data (nth 0 args)))
+;;         (if (and (string= (gethash "jsonrpc" json-data "") "2.0")
+;;                  (not (gethash "id" json-data nil))
+;;                  (not (gethash "method" json-data nil)))
+;;             nil ; (message "Method not found")
+;;           (apply original-function args)))
+;;     (apply original-function args)))
+;; ;; Runs the function `lsp--gdscript-ignore-errors` around `lsp--get-message-type` to suppress unknown notification errors.
+;; (advice-add #'lsp--get-message-type :around #'lsp--gdscript-ignore-errors)
 
-(use-package gdscript-mode
-  :custom
-  (gdscript-use-tab-indents t)
-  (gdscript-indent-offset 2))
+;; (use-package gdscript-mode
+;;   :custom
+;;   (gdscript-use-tab-indents t)
+;;   (gdscript-indent-offset 2))
+
+
+;;
+;;; hl-todo
+
+
+                                        ; TODO
+                                        ; FIXME
+                                        ; REVIEW
+                                        ; HACK
+                                        ; DEPRECATED
+                                        ; NOTE
+                                        ; BUG
+                                        ; XXX
+
+(after! hl-todo)
+
+
+;;
+;;; dap-mode templates
+
+(after! dap-mode
+  (require 'dap-node)
+
+  (dap-register-debug-template
+   "Node::Attach to a running process"
+   (list :type "node"
+         :request "attach"
+         :host "localhost"
+         :port 9229
+         :cwd "${workspaceFolder}"
+         :program "__ignored"
+         :continueOnAttach t
+         :skipFiles (list "<node_internals>/**" "**/node_modules/**")
+         :name "Node::Attach to a running process"))
+
+  (setq dap-print-io t))
