@@ -437,6 +437,12 @@
 
 
 ;;
+;;; typst
+
+(use-package! typst-ts-mode)
+
+
+;;
 ;;; dap-mode templates
 
 (after! dap-mode
