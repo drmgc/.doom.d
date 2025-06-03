@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Jest / it (async)
+# key: jai
+# --
+it('${1:name}', async () => {$0});
