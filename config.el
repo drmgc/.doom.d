@@ -6,12 +6,15 @@
 ;;
 ;; Adjust garbage collection thresholds during startup, and thereafter
 ;;
-(let ((normal-gc-cons-threshold (* 32 1024 1024))
+
+(let ((normal-gc-cons-threshold (* 128 1024 1024))
       (init-gc-cons-threshold (* 512 1024 1024)))
   (setq gc-cons-threshold init-gc-cons-threshold)
   ;; (setq gc-cons-percentage 0.5)
   (add-hook 'emacs-startup-hook
             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+
+(setq read-process-output-max (* 1 1024 1024))
 
 (setq initial-frame-alist
       (append initial-frame-alist
@@ -39,8 +42,9 @@
 ;;
 ;; (setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-(setq doom-font (font-spec :family "Fira Code" :size 18 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 19))
+
+(setq doom-font (font-spec :family "Fira Code" :size 18 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 20))
 
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
@@ -105,7 +109,7 @@
   :defer 20
   :custom
   (blamer-idle-time 0.3)
-  (blamer-min-offset 48)
+  (blamer-min-offset 30)
   (blamer-max-commit-message-length 120)
   (blamer-type 'postframe-popup)
   :config
@@ -116,6 +120,10 @@
         "I" #'blamer-show-commit-info
         "i" #'blamer-show-posframe-commit-info)
   (global-blamer-mode 0))
+
+
+;;
+;;; Copilot
 
 
 ;; accept completion from copilot and fallback to company
@@ -140,17 +148,31 @@
   :bind (:map copilot-completion-map
               ("C-S-<f12>" . 'copilot-accept-completion-by-word)))
 
+(use-package! copilot-chat
+  :init
+  (setq copilot-chat-frontend 'markdown))
+
+
 
 (define-key key-translation-map (kbd "C-h") (kbd "DEL"))
 (define-key key-translation-map (kbd "C-M-h") (kbd "M-DEL"))
 (define-key key-translation-map (kbd "C-?") (kbd "C-h"))
 
 
+
+(add-hook! 'c-mode-common-hook
+  (setq-local +word-wrap-extra-indent 'single
+              +word-wrap-fill-style 'soft)
+  ;; (+word-wrap-mode +1)
+  )
+
+
 ;;
 ;;; Lsp
 
 (after! lsp-mode
-  (setq lsp-print-performance t))
+  (setq lsp-print-performance t)
+  (add-hook! typescript-ts-mode #'lsp))
 
 (after! lsp-ui
   (setq lsp-ui-sideline-diagnostic-max-lines 4)
@@ -460,4 +482,75 @@
          :skipFiles (list "<node_internals>/**" "**/node_modules/**")
          :name "Node::Attach to a running process"))
 
+  (require 'dap-cpptools)
+
   (setq dap-print-io t))
+
+
+;;
+;;; jira.el
+
+(use-package jira
+  :demand t
+  :config
+  (setq jira-base-url "https://toppanmerrill.atlassian.net")
+  (setq jira-username "sergeynaumov@toppanmerrill.com"))
+
+
+
+;;
+;;; code-review
+
+(use-package code-review
+  :config
+  (add-hook 'code-review-mode-hook #'emojify-mode)
+  (setq code-review-auth-login-marker 'forge))
+
+(add-hook 'code-review-mode-hook
+          (lambda ()
+            ;; include *Code-Review* buffer into current workspace
+            (persp-add-buffer (current-buffer))))
+
+
+;; (defun uv-activate ()
+;;   "Activate Python environment managed by uv based on current project directory.
+;; Looks for .venv directory in project root and activates the Python interpreter."
+;;   (interactive)
+;;   (let* ((project-root (project-root (project-current t)))
+;;          (venv-path (expand-file-name ".venv" project-root))
+;;          (python-path (expand-file-name
+;;                        (if (eq system-type 'windows-nt)
+;;                            "Scripts/python.exe"
+;;                          "bin/python")
+;;                        venv-path)))
+;;     (if (file-exists-p python-path)
+;;         (progn
+;;           ;; Set Python interpreter path
+;;           (setq python-shell-interpreter python-path)
+
+;;           ;; Update exec-path to include the venv's bin directory
+;;           (let ((venv-bin-dir (file-name-directory python-path)))
+;;             (setq exec-path (cons venv-bin-dir
+;;                                   (remove venv-bin-dir exec-path))))
+
+;;           ;; Update PATH environment variable
+;;           (setenv "PATH" (concat (file-name-directory python-path)
+;;                                  path-separator
+;;                                  (getenv "PATH")))
+
+;;           ;; Update VIRTUAL_ENV environment variable
+;;           (setenv "VIRTUAL_ENV" venv-path)
+
+;;           ;; Remove PYTHONHOME if it exists
+;;           (setenv "PYTHONHOME" nil)
+
+;;           (message "Activated UV Python environment at %s" venv-path))
+;;       (error "No UV Python environment found in %s" project-root))))
+
+
+;;
+;;; cov
+
+;; (use-package! cov
+;;   :config
+;;   (setq cov-coverage-mode t))
